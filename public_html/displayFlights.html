@@ -1,0 +1,345 @@
+<html>
+<head>
+     <link data-require="bootstrap-css@3.x" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <script data-require="angular.js@*" data-semver="1.2.14" src="http://code.angularjs.org/1.2.14/angular.js"></script>
+    <script src="script.js"></script>
+     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+    <link rel="stylesheet" type="text/css" href="style-displayFlight-page.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: RoyalBlue;
+}
+td3{
+     
+  font-size: 16px;
+    color: #46C646;
+   
+}
+</style>
+
+
+
+
+
+</head>
+  
+<body background="pink_and_blue_baby_bottles_and_pacifiers_background_seamless.jpg">
+
+
+
+
+  
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')" >List View</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')"  id="defaultOpen">Matrix View</button>
+
+</div>
+
+<div id="London" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+
+
+  <div class="wrapper">
+<p id="demo"></p>
+     
+     
+</div>
+   <div class="col-lg-12 col-md-12 col-xs-12 table-responsive">
+	<table class="table  table-hover table-bordered">
+		<thead>
+			<tr class="bgColor">
+				 <th><font size="5vw" ><u>Price</u></th>
+				<td><font size="5vw" ><u>Airline</u></td>
+				<td><font size="5vw" ><u>Take-off</u></td>
+				<td><font size="5vw" ><u>Landing</u></td>
+				<td><font size="5vw"><u>Stops (Duration)</u></td>
+			
+				
+			</tr>
+		</thead>
+		<tbody id="myTable">
+			 
+		</tbody>
+	</table>
+</div>
+  <center>
+<div class="col-lg-6 col-md-6 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-xs-4">
+	<button class="col-lg-12 col-xs-12 bgColor" id="PreValue">Pre</button>
+	</div>
+  	<div class="col-lg-3  col-md-2 col-xs-4 nav">
+	</div>	
+	<div class="col-lg-2  col-md-2 col-xs-4">
+	<button class="col-lg-12 col-xs-12 bgColor" id="nextValue">Next</button>
+	</div>	
+</div>
+      </center>
+</div>
+
+   
+    
+    
+    
+   
+    
+<div id="Paris" class="tabcontent">
+  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+  <p id="demo2"></p>
+    <div class="col-lg-12 col-md-12 col-xs-12 table-responsive">
+	<table class="table  table-hover table-bordered">
+		<thead>
+                    
+			<tr class="bgColor2 " >
+                                 <th>Price</th>
+				<td>Airline</td>
+				<td>Take-off</td>
+				<td>Landing</td>
+				<td>Stops (Duration)</td>
+				
+			</tr>
+		</thead>
+		<tbody id="myTable2">
+			 
+		</tbody>
+	</table>
+</div>
+  <center>
+<div class="col-lg-6 col-md-6 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-xs-4">
+	<button class="col-lg-12 col-xs-12 bgColor2" id="PreValue2">Pre</button>
+	</div>
+  	<div class="col-lg-3  col-md-2 col-xs-4 nav">
+	</div>	
+	<div class="col-lg-2  col-md-2 col-xs-4">
+	<button class="col-lg-12 col-xs-12 bgColor2" id="nextValue2">Next</button>
+	</div>	
+</div>
+        </center> 
+  
+</div>
+    
+   
+    
+    
+
+<script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+       
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    
+    for (i = 0; i < tablinks.length; i++) {
+        
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+ <script>
+  
+
+$(function() {
+
+   $.getJSON('friends.json', function(data) {
+				var table =  $('#myTable');
+                                 
+  
+                                var flights=data;
+				var max_size=flights.length;
+				var sta = 0;
+				var elements_per_page = 3;
+				var limit = elements_per_page;
+				goFun(sta,limit);
+                             
+
+				function goFun(sta,limit){
+        
+					for(var i=sta;i<limit;i++){
+                                         
+				
+					var tab='<tr><td><font size="6" color="blue" ><span style="text-decoration: underline;">'+"$"+flights[i].Price+"\n"+'</td><td>'+flights[i].Airline+"\n"+'</td><td>'+flights[i].Takeoff+"\n"+'</td><td>'
+					          +flights[i].Landing+"\n"+'</td><td>'+flights[i].Stops+ " &nbsp;&nbsp; "+   
+                                                '  <button ><i class="fa fa-home"></i></button>'+
+                                               '   <button ><i class="fa fa-bars"></i></button>'+
+                                                 ' <button ><i class="fa fa-trash"></i></button>'+
+                                               '   <button ><i class="fa fa-close"></i></button>'+
+                                               '   <button ><i class="fa fa-folder"></i></button>';
+                                        
+            
+            $('#myTable').append(tab)
+	}
+       
+                       document.getElementById("demo").innerHTML = '<td3>'+(i-sta)+'</td3>'+" of "+max_size + " Shown - one - way";
+                                    
+				}
+				$('#nextValue').click(function(){
+                                     
+					var next = limit;
+					if(max_size>=next) {
+					def = limit+elements_per_page;
+           limit = def
+					table.empty();
+                    if(limit > max_size) {
+          def = max_size;
+          }
+         
+					goFun(next,def);
+          
+					}
+				});
+				  $('#PreValue').click(function(){
+					var pre = limit-(2*elements_per_page);
+                                       
+					if(pre>=0) {
+					limit = limit-elements_per_page;
+					table.empty();
+                                        
+					goFun(pre,limit); 
+					}
+				});
+ var number = Math.round(flights.length / elements_per_page);
+var num=flights.length/elements_per_page;
+
+ for(i=1;i<=num+1;i++) {
+  $('.nav').append('<button class="btn">'+i+'</button>');
+ }
+ $('.nav button').click(function(){
+    
+       var start = $(this).text();
+       table.empty();
+       
+       limit = 3*(parseInt(start)+1) > max_size ? max_size: 3*(parseInt(start)+1)
+      goFun(start*3,limit); 
+ });
+});
+   
+  
+
+ 
+
+});
+
+
+
+
+</script>
+<script>
+  
+
+$(function() {
+
+   $.getJSON('friends.json', function(data) {
+				var table =  $('#myTable2');
+                                 
+  
+                                var flights=data;
+				var max_size=flights.length;
+				var sta = 0;
+				var elements_per_page = 3;
+				var limit = elements_per_page;
+                            
+				goFun(sta,limit);
+                            
+				function goFun(sta,limit){
+        
+                                    
+  
+					for(var i=sta;i<limit;i++){
+					
+					var tab='<tr><td><font size="4" color="blue">'+flights[i].Price+"\n"+'</td><td>'+flights[i].Airline+"\n"+'</td><td>'+flights[i].Takeoff+"\n"+'</td><td>'
+					          +flights[i].Landing+"\n"+'</td><td>'+flights[i].Stops+'   <button ><i class="fa fa-close"></i></button>'+
+                                               '   <button ><i class="fa fa-folder"></i></button>';
+					      
+                                       $('#myTable2').append(tab)
+    
+					}
+         document.getElementById("demo2").innerHTML = '<td3>'+(i-sta)+'</td3>'+" of "+max_size + " Shown - one - way";
+                         
+                                    
+				}
+				$('#nextValue2').click(function(){
+                                  
+					var next = limit;
+                                      
+					if(max_size>=next) {
+					def = limit+elements_per_page;
+           limit = def
+              
+					table.empty();
+                    if(limit > max_size) {
+          def = max_size;
+          
+          }
+    
+					goFun(next,def);
+          
+					}
+				});
+				  $('#PreValue2').click(function(){
+                                      
+                                     
+					var pre = limit-(2*elements_per_page);
+                                            
+					if(pre>=0) {
+					limit = limit-elements_per_page;
+                                          if(limit > max_size) {
+          def = max_size;
+          
+          }
+					table.empty();
+                                       
+					goFun(pre,limit); 
+                                  
+					}
+				});
+ var number = Math.round(flights.length / elements_per_page);
+ 
+ for(i=1;i<=number;i++) {
+  $('.nav2').append('<button class="btn" >'+i+'</button>');
+ }
+ $('.nav2 button').click(function(){
+     
+       var start = $(this).text();
+           
+       table.empty();
+       limit = 3*(parseInt(start)+1) > max_size ? max_size: 3*(parseInt(start)+1)
+   
+      goFun(start*3,limit); 
+ });
+});
+   
+  
+
+ 
+
+});
+
+
+
+
+</script>
+</body>
+
+
+</html>
