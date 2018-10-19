@@ -1,0 +1,58 @@
+
+[
+{
+"Price":"2055",
+"Airline":"El Al Israel Air",
+"Takeoff":"BKK 15:35",
+"Landing": "CDG 05:30",
+"Stops":"1(19h 55m)"
+
+},
+{
+"Price":"3519",
+"Airline":"Singapore Air",
+"Takeoff":"BKK 06:00",
+"Landing": "CDG 18:00",
+"Stops":"1(17h 45m)"
+
+},
+{
+"Price":"3519",
+"Airline":"Singapore Air",
+"Takeoff":"BKK 16:40",
+"Landing": "CDG 06:50",
+"Stops":"1(20h 10m)"
+},
+{
+"Price":"6969",
+"Airline":"Ann Airline",
+"Takeoff":"BKK 11:00",
+"Landing": "CDG 12:00",
+"Stops":"1(10h 22m)"
+
+},
+{
+"Price":"6969",
+"Airline":"Ann Airline",
+"Takeoff":"BKK 11:00",
+"Landing": "CDG 12:00",
+"Stops":"1(10h 22m)"
+
+},
+{
+"Price":"6969",
+"Airline":"Ann Airline",
+"Takeoff":"BKK 11:00",
+"Landing": "CDG 12:00",
+"Stops":"1(10h 22m)"
+
+},
+{
+"Price":"6969",
+"Airline":"Ann Airline",
+"Takeoff":"BKK 11:00",
+"Landing": "CDG 12:00",
+"Stops":"1(10h 22m)"
+
+}
+]
